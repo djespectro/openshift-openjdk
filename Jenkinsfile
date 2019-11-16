@@ -9,13 +9,13 @@ pipeline
             stage('Build App') {
                 steps{
                     script {
-                        openshift.withCluster("openshift") {
-                          def template = openshift
+                        def template = openshift.withCluster("openshift") {
+                          openshift
                             .withProject( "mac" )
                             .selector('template', 'template-openjdk')
-                            .object()                          
-                          echo "Template contains ${template.parameters.size()} parameters"
+                            .object()
                         }
+                        echo "Template contains ${template.parameters.size()} parameters"
                     }
 
                 }
