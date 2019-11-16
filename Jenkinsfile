@@ -20,7 +20,7 @@ pipeline
                 '-p', "CONTEXT_DIR=.",
                 '-p', "APPLICATION_NAME=app")
             )
-            
+
           }
         }
 
@@ -39,7 +39,7 @@ pipeline
         script {
           openshift.withCluster("openshift") {
             openshift.withProject( "mac" ){
-              openshift.selector("bc", "app").startBuild("--from-file=./target/quiz.jar", "--wait")
+              // openshift.selector("bc", "app").startBuild("--from-file=./target/quiz.jar", "--wait")
             }
           }
         }
