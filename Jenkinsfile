@@ -18,7 +18,7 @@ pipeline
 
                           openshift.create( openshift.process( template,
                              '-p', "CONTEXT_DIR=.",
-                             '-p', "APPLICATION_NAME=app.jar")
+                             '-p', "APPLICATION_NAME=app")
                           )
 
                         }
