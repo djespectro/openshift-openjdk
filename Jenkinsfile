@@ -14,6 +14,13 @@ pipeline
               openshift.selector('template', 'template-openjdk').object()
             }
             echo "Template contains ${template.parameters} parameters"
+
+            openshift.create(
+              openshift.process( template,
+                '-p', "CONTEXT_DIR=.",
+                '-p', "APPLICATION_NAME=app")
+            )
+            
           }
         }
 
