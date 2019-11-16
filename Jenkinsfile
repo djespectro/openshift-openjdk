@@ -16,11 +16,11 @@ pipeline
                               openshift.selector('template', 'template-openjdk').object()
                           } // Find the named template and unmarshal into a Groovy object
 
-                          openshift.create(
-                            openshift.process( template,
-                              '-p', "CONTEXT_DIR=.",
-                              '-p', "APPLICATION_NAME=app")
-                          )
+                          // openshift.create(
+                          //   openshift.process( template,
+                          //     '-p', "CONTEXT_DIR=.",
+                          //     '-p', "APPLICATION_NAME=app")
+                          // )
                           //----------------------
 
                           openshift.withCluster() {
