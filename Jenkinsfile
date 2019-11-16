@@ -21,11 +21,18 @@ pipeline
     }// stage('Build App') {
 
     stage('Build Image') {
+      when {
+        expression {
+          openshift.withCluster() {
+            return openshift.selector("bc", "app").exists();
+          }
+        }
+      }
       steps {
         script {
           openshift.withCluster("openshift") {
             openshift.withProject( "mac" ){
-              openshift.selector("bc", "app").startBuild("--from-file=target/app.jar", "--wait")
+              openshift.selector("bc", "app").startBuild("--from-file=./app.jar", "--wait")
             }
           }
         }
