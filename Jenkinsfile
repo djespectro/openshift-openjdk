@@ -35,15 +35,15 @@ pipeline
       //     }
       //   }
       // }
-      steps {
-        script {
-          openshift.withCluster("openshift") {
-            openshift.withProject( "mac" ){
-              openshift.selector("bc", "app").startBuild("--from-file=./target/quiz.jar", "--wait")
-            }
-          }
-        }
-      }
+      // steps {
+      //   script {
+      //     openshift.withCluster("openshift") {
+      //       openshift.withProject( "mac" ){
+      //         openshift.selector("bc", "app").startBuild("--from-file=./target/quiz.jar", "--wait")
+      //       }
+      //     }
+      //   }
+      // }
       }//stage('Build Image') {
 
 
