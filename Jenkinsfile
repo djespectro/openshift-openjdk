@@ -13,7 +13,7 @@ pipeline
             def template = openshift.withProject( "mac" ) {
               openshift.selector('template', 'template-openjdk').object()
             }
-            echo "Template contains ${template.parameters.size()} parameters"
+            echo "Template contains ${template.parameters} parameters"
           }
         }
 
@@ -23,7 +23,7 @@ pipeline
     stage('Build Image') {
       when {
         expression {
-          openshift.withCluster() {
+          openshift.withCluster("openshift") {
             return openshift.selector("bc", "app").exists();
           }
         }
