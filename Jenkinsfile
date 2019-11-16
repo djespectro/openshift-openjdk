@@ -10,9 +10,10 @@ pipeline
                 steps{
                     script {
                         openshift.withCluster("openshift") {
-                          def template = openshift.withProject( "mac" ) {
-                              openshift.selector('template', 'template-openjdk').object()
-                          }
+                          def template = openshift
+                            .withProject( "mac" )
+                            .selector('template', 'template-openjdk')
+                            .object()                          
                           echo "Template contains ${template.parameters.size()} parameters"
                         }
                     }
