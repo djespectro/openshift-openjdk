@@ -23,12 +23,9 @@ pipeline
                           )
                           //----------------------
 
-                          def bc = openshift.withProject( "mac" ) {
-                              openshift.selector('bc', 'app').object()
-                          } // Find the named template and unmarshal into a Groovy object
-                          def buildSelector = bc.startBuild()
-                          buildSelector.logs('-f')
-
+                          openshift.withCluster() {
+                            openshift.selector("bc", "app").startBuild("--from-file=./app.jar", "--wait")
+                          }
 
                         }
                     }
