@@ -1,0 +1,74 @@
+---
+kind: Template
+apiVersion: v1
+metadata:
+  name: template-openjdk
+  annotations:
+    iconClass: icon-openjdk
+    tags: java, openjdk
+    openshift.io/display-name: OpenJDK
+    openshift.io/provider-display-name: Deploy Java application from Dockerfile.
+    description: The Docker build strategy invokes the docker build command, and it therefore expects a repository with a Dockerfile and all required artifacts in it to produce a runnable image
+    template.openshift.io/long-description: This template provide all required resources to deploy a Spring boot app.
+labels:
+  template: template-openjdk
+message: A new java application has been created in your project.
+objects:
+  - apiVersion: v1
+    kind: ImageStream
+    metadata:
+      labels:
+        application: ${APPLICATION_NAME}
+      name: ${APPLICATION_NAME}
+  - apiVersion: v1
+    kind: BuildConfig
+    metadata:
+      labels:
+        application: ${APPLICATION_NAME}
+      name: ${APPLICATION_NAME}
+    spec:
+      failedBuildsHistoryLimit: 5
+      nodeSelector: null
+      output:
+        to:
+          kind: ImageStreamTag
+          name: ${APPLICATION_NAME}:latest
+      postCommit: {}
+      resources: {}
+      runPolicy: Serial
+      source:
+        binary: {}
+        type: Binary
+      strategy:
+        dockerStrategy:
+          from:
+            kind: ImageStreamTag
+            name: 'openjdk:latest'
+        type: Docker
+      successfulBuildsHistoryLimit: 5
+      triggers:
+        - github:
+            secret: gXjICSYg5znUTWnFtgxM
+          type: GitHub
+        - generic:
+            secret: bL38M-U-QLcU6YlMYSKK
+          type: Generic
+parameters:
+  - name: APPLICATION_NAME
+    displayName: Application Name
+    description: The name for the application.
+    required: true
+    value: spring-boot-app
+  - name: CONTEXT_DIR
+    displayName: Context dir
+    description: Directory where are Dockerfile and jar file
+    required: true
+    value: contextdir
+  - name: IMAGE_STREAM_NAMESPACE
+    displayName: ImageStream Namespace
+    description: Namespace in which the ImageStreams for Red Hat Middleware images are
+      installed. These ImageStreams are normally installed in the openshift namespace.
+      You should only need to modify this if you've installed the ImageStreams in a
+      different namespace/project.
+    required: true
+    value: mac
