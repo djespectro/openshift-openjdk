@@ -32,7 +32,7 @@ pipeline
         script {
           openshift.withCluster("openshift") {
             openshift.withProject( "mac" ){
-              openshift.selector("bc", "app").startBuild("--from-file=./app.jar", "--wait")
+              openshift.selector("bc", "app").startBuild("--from-file=./target/app.jar", "--wait")
             }
           }
         }
