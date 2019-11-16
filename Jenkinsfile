@@ -27,24 +27,24 @@ pipeline
       }
     }// stage('Build App') {
 
-    stage('Build Image') {
-      // when {
-      //   expression {
-      //     openshift.withCluster("openshift") {
-      //       return openshift.selector("bc", "app").exists();
-      //     }
-      //   }
-      // }
-      // steps {
-      //   script {
-      //     openshift.withCluster("openshift") {
-      //       openshift.withProject( "mac" ){
-      //         openshift.selector("bc", "app").startBuild("--from-file=./target/quiz.jar", "--wait")
-      //       }
-      //     }
-      //   }
-      // }
-      }//stage('Build Image') {
+    // stage('Build Image') {
+    //   when {
+    //     expression {
+    //       openshift.withCluster("openshift") {
+    //         return openshift.selector("bc", "app").exists();
+    //       }
+    //     }
+    //   }
+    //   steps {
+    //     script {
+    //       openshift.withCluster("openshift") {
+    //         openshift.withProject( "mac" ){
+    //           openshift.selector("bc", "app").startBuild("--from-file=./target/quiz.jar", "--wait")
+    //         }
+    //       }
+    //     }
+    //   }
+    //   }//stage('Build Image') {
 
 
       }
