@@ -12,10 +12,14 @@ pipeline
                     script {
                         openshift.withCluster("openshift") {
 
-                                def template = openshift.withProject( "mac" ) {
-                                    openshift.selector('template', 'template-openjdk').object()
-                                } // Find the named template and unmarshal into a Groovy object
-                                echo "Template contains ${template.parameters.size()} parameters"    // Explore the template model
+                          def template = openshift.withProject( "mac" ) {
+                              openshift.selector('template', 'template-openjdk').object()
+                          } // Find the named template and unmarshal into a Groovy object
+
+                          openshift.create( openshift.process( template,
+                             '-p', "CONTEXT_DIR=.",
+                             '-p', "APPLICATION_NAME=app.jar")
+                          )
 
                         }
                     }
