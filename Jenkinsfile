@@ -15,11 +15,11 @@ pipeline
             }
             echo "Template contains ${template.parameters} parameters"
 
-            // openshift.create(
-            //   openshift.process( template,
-            //     '-p', "CONTEXT_DIR=.",
-            //     '-p', "APPLICATION_NAME=app")
-            // )
+            openshift.create(
+              openshift.process( template,
+                '-p', "CONTEXT_DIR=.",
+                '-p', "APPLICATION_NAME=app")
+            )
 
           }
         }
